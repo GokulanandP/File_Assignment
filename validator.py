@@ -1,6 +1,6 @@
 import re, datetime
 
-#function to check whether data recieve is satisfying the conditions
+
 def validator(**request):
 
     if request['CreditCardNumber'] and creditcardvalidator(request['CreditCardNumber']):
