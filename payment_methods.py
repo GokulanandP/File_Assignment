@@ -49,7 +49,6 @@ class BasePaymentGateway:
             gateway = self.gateway
         while self.repeat + 1 > 0:
             if self.connect(gateway, user_details):
-                print("payment of {} in {} successful".format(amount, self.gateway))
                 return True
             self.repeat -= 1
         return False
