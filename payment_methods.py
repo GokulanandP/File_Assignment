@@ -20,6 +20,11 @@ class PaymentGateway:
                 else:
                     return False
                 status = payment_mode.pay(self.amount, self.card_details)
+                # one more try with CheapBasePaymentGateway if ExpensiveBasePaymentGateway fails
+                if status is False and 20 < int(self.amount) < 500:
+                    payment_mode = CheapBasePaymentGateway()
+                    status = payment_mode.pay(self.amount,self.card_details)
+
                 return status
             except:
                 return False
@@ -57,7 +62,7 @@ class BasePaymentGateway:
 class PremiumBasePaymentGateway(BasePaymentGateway):
     def __init__(self, repeat=3):
         super(PremiumBasePaymentGateway, self).__init__(repeat)
-        self.gateway = "PremiumBasePaymentGatway"
+        self.gateway = "PremiumBasePaymentGateway"
 
     def __repr__(self):
         return "<PremiumBasePaymentGateway>"
